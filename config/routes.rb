@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :ingredients
   resources :recipes
   resources :grocery_lists
   resources :pantries
