@@ -16,4 +16,13 @@ class User < ApplicationRecord
     #     }
     # end
     
+    def send_initialization_info
+        info = {
+            id: self.id,
+            name: self.name,
+            pantry_id: self.pantry.id,
+            recipes: self.recipes
+        }
+    end
+    
 end
