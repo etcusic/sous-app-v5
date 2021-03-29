@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_29_141414) do
+ActiveRecord::Schema.define(version: 2021_03_29_141646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "daily_menus", force: :cascade do |t|
+    t.bigint "weekly_menu_id", null: false
+    t.date "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["weekly_menu_id"], name: "index_daily_menus_on_weekly_menu_id"
+  end
 
   create_table "grocery_list_ingredients", force: :cascade do |t|
     t.bigint "grocery_list_id", null: false
@@ -38,6 +46,16 @@ ActiveRecord::Schema.define(version: 2021_03_29_141414) do
     t.float "cost_per_unit"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "meals", force: :cascade do |t|
+    t.bigint "daily_menu_id", null: false
+    t.bigint "recipe_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["daily_menu_id"], name: "index_meals_on_daily_menu_id"
+    t.index ["recipe_id"], name: "index_meals_on_recipe_id"
   end
 
   create_table "pantries", force: :cascade do |t|
@@ -84,13 +102,24 @@ ActiveRecord::Schema.define(version: 2021_03_29_141414) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "weekly_menus", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_weekly_menus_on_user_id"
+  end
+
+  add_foreign_key "daily_menus", "weekly_menus"
   add_foreign_key "grocery_list_ingredients", "grocery_lists"
   add_foreign_key "grocery_list_ingredients", "ingredients"
   add_foreign_key "grocery_lists", "users"
+  add_foreign_key "meals", "daily_menus"
+  add_foreign_key "meals", "recipes"
   add_foreign_key "pantries", "users"
   add_foreign_key "pantry_ingredients", "ingredients"
   add_foreign_key "pantry_ingredients", "pantries"
   add_foreign_key "recipe_ingredients", "ingredients"
   add_foreign_key "recipe_ingredients", "recipes"
   add_foreign_key "recipes", "users"
+  add_foreign_key "weekly_menus", "users"
 end
