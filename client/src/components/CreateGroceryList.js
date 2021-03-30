@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import GroceryListStatus from './GroceryListStatus.js'
-import AddToGroceryList from './AddToGroceryList'
+import NewOrEditIngredient from './NewOrEditIngredient'
 
 class CreateGroceryList extends Component {
 
@@ -27,13 +27,18 @@ class CreateGroceryList extends Component {
          })
     }
 
+    removeIngredient = (index) => {
+        let updatedList = this.state.list.filter((ing, i) => i !== index)
+        this.setState({ list: updatedList })
+    }
+
     render(){
         return(
             <div>
                 <h1>Create Grocery List: </h1>
                 <button onClick={ this.addIngredient }>Add Ingredient</button>
                 <div className="float-right">
-                    <GroceryListStatus list={ this.state.list } />
+                    <GroceryListStatus list={ this.state.list } removeIngredient={ this.removeIngredient } />
                 </div>
                 <div className="float-left">
                     <NewOrEditIngredient />

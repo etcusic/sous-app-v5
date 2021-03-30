@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-class AddToGroceryList extends Component {
+class NewOrEditIngredient extends Component {
 
     render(){
         return(
@@ -23,4 +23,4 @@ const mapStateToProps = state => {
     }
 }
   
-export default connect(mapStateToProps)(AddToGroceryList)
+export default connect(mapStateToProps)(NewOrEditIngredient)
