@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import RecipesTable from '../components/RecipesTable'
 
 class RecipesPage extends Component {
 
@@ -7,6 +8,7 @@ class RecipesPage extends Component {
         return (
         <div>
             <h1>RECIPES</h1>
+            <RecipesTable />
         </div>
         );
     }
@@ -15,7 +17,6 @@ class RecipesPage extends Component {
 
 const mapStateToProps = state => {
     return {
-        userName: state.user.name,
         recipes: state.recipes
     }
 }
