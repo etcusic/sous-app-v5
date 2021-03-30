@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 class AddToGroceryList extends Component {
 
     render(){
         return(
             <div>
+                <h1>Create Grocery List: </h1>
+                <div>
 
+                </div>
             </div>
         )
     }

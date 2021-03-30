@@ -6,9 +6,12 @@ class GroceryListStatus extends Component {
 
     render(){
         return(
-            <table>
+            <div>
+                <h1 className="float-center">Create Grocery Status: </h1>
+                <table className="float-center">
 
-            </table>
+                </table>
+            </div>
         )
     }
 

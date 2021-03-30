@@ -11,10 +11,10 @@ class CreateGroceryList extends Component {
         return(
             <div>
                 <h1>Create Grocery List: </h1>
-                <div id="grocery-list-status">
+                <div className="float-right">
                     <GroceryListStatus />
                 </div>
-                <div id="add-ingredient">
+                <div className="float-left">
                     <AddToGroceryList />
                 </div>
             </div>
