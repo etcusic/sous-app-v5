@@ -14,3 +14,4 @@ class GroceryListStatus extends Component {
 
 }
 
+export default GroceryListStatus

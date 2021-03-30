@@ -21,7 +21,8 @@ class User < ApplicationRecord
             id: self.id,
             name: self.name,
             pantry: self.pantry.ingredients_with_quantities,
-            recipes: self.recipes
+            recipes: self.recipes,
+            ingredients: Ingredient.all
         }
     end
     

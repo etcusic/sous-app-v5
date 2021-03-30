@@ -8,6 +8,7 @@ export const initializeAppState = () => {
             dispatch({ type: "LOAD_USER", payload: {id: userInfo.id, name: userInfo.name} })
             dispatch({ type: "LOAD_RECIPES", payload: userInfo.recipes})
             dispatch({ type: "LOAD_PANTRY", payload: userInfo.pantry})
+            dispatch({ type: "LOAD_INGREDIENTS", payload: userInfo.ingredients})
         })
     }
 }

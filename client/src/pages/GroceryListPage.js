@@ -18,7 +18,7 @@ class GroceryListPage extends Component {
     render() {
         return (
         <div>
-            <h1>GROCERY LIST</h1>
+            <h1>GROCERY LIST PAGE</h1>
             {/* FETCH INGREDIENTS TO CREATE GROCERY LIST */}
             { this.state.view }
         </div>
