@@ -20,7 +20,7 @@ class User < ApplicationRecord
         info = {
             id: self.id,
             name: self.name,
-            pantry_id: self.pantry.id,
+            pantry: Ingredient.all,
             recipes: self.recipes
         }
     end
