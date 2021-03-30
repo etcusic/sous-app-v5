@@ -1,10 +1,10 @@
 import './App.css';
-import Placeholder from './components/Placeholder'
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (
     <div className="App">
-      <Placeholder />
+      <ProfilePage />
     </div>
   );
 }
