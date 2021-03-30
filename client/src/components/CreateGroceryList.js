@@ -15,12 +15,11 @@ class CreateGroceryList extends Component {
 
     // reset AddToGroceryList after an ingredient is added
 
-    // need add to list function
+    // need to remove count once form input is working
     addIngredient = () => {
-        let updatedList = this.state.list
         let ing = this.props.ingredients[this.state.count]
         ing.quantity = Math.floor(Math.random() * (40 - 1) + 1)
-        updatedList.push(ing)
+        let updatedList = this.state.list.push(ing)
         this.setState({ 
             list: updatedList,
             count: this.state.count + 1
