@@ -6,7 +6,7 @@ class RecipesPage extends Component {
     render() {
         return (
         <div>
-            <h1>{ this.props.userName }</h1>
+            <h1>RECIPES</h1>
         </div>
         );
     }
@@ -15,9 +15,9 @@ class RecipesPage extends Component {
 
 const mapStateToProps = state => {
     return {
-        userName: state.user,
+        userName: state.user.name,
         recipes: state.recipes
     }
 }
   
-export default connect(mapStateToProps, {  })(RecipesPage)
+export default connect(mapStateToProps)(RecipesPage)

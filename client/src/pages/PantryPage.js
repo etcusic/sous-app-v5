@@ -6,7 +6,7 @@ class PantryPage extends Component {
     render() {
         return (
         <div>
-            <h1>{ this.props.userName }</h1>
+            <h1>PANTRY</h1>
         </div>
         );
     }
@@ -15,9 +15,9 @@ class PantryPage extends Component {
 
 const mapStateToProps = state => {
     return {
-        userName: state.user,
+        userName: state.user.name,
         pantry: state.pantry
     }
 }
   
-export default connect(mapStateToProps, {  })(PantryPage)
+export default connect(mapStateToProps)(PantryPage)
