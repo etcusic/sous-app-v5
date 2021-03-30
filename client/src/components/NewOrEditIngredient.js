@@ -32,6 +32,12 @@ class NewOrEditIngredient extends Component {
         this.setState({ currentItem: item })
     }
 
+    changeQuantity = (event) => {
+        let item = this.state.currentItem
+        item.quantity = event.target.value
+        this.setState({ currentItem: item })
+    }
+
     checkState = () => {
         console.log(this.state.currentItem)
     } 
@@ -66,10 +72,19 @@ class NewOrEditIngredient extends Component {
                             }) }
                         </select>
                     </li>
+
+                    <li>
+                        Quantity:
+                        <input type="number" placeholder="---" onChange={ event => this.changeQuantity(event) }></input>
+                    </li>
+
+                    <li>
+                        Unit: { this.state.currentItem.name ? this.state.currentItem.unit : "---"} 
+                    </li>
                 </ul>
                     
 
-                    
+                    <button onClick={ this.checkState }>Check State</button>
                     
                 </div>
             </div>
