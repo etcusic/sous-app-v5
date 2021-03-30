@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import PantryTable from '../components/PantryTable'
 
 class PantryPage extends Component {
 
     render() {
         return (
-        <div>
-            <h1>PANTRY</h1>
-        </div>
+            <div>
+                <h1>PANTRY</h1>
+                <PantryTable />
+            </div>
         );
     }
 
@@ -15,7 +17,6 @@ class PantryPage extends Component {
 
 const mapStateToProps = state => {
     return {
-        userName: state.user.name,
         pantry: state.pantry
     }
 }
