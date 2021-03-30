@@ -19,7 +19,6 @@ class GroceryListPage extends Component {
         return (
         <div>
             <h1>GROCERY LIST PAGE</h1>
-            {/* FETCH INGREDIENTS TO CREATE GROCERY LIST */}
             { this.state.view }
         </div>
         );

@@ -25,7 +25,8 @@ class CreateGroceryList extends Component {
 
 const mapStateToProps = state => {
     return {
-        userName: state.user.name
+        userName: state.user.name,
+        ingredients: state.ingredients
     }
 }
   
