@@ -8,39 +8,66 @@ class CreateGroceryList extends Component {
     constructor(){
         super()
         this.state = {
+            currentItem: {},
             list: [],
-            count: 0
+            allIngredients: []
         }
+    }
+
+    componentDidMount(){
+        let ingredients = {}
+        this.props.ingredients.forEach( ing => ingredients[ing.id] = ing )
+        this.setState({ 
+            currentItem: {id: 0, quantity: 0},
+            allIngredients: ingredients
+        })
     }
 
     // reset AddToGroceryList after an ingredient is added
 
     // need to remove count once form input is working
     addIngredient = () => {
-        let ing = this.props.ingredients[this.state.count]
-        ing.quantity = Math.floor(Math.random() * (40 - 1) + 1)
-        let updatedList = this.state.list.push(ing)
-        this.setState({ 
-            list: updatedList,
-            count: this.state.count + 1
-         })
+        let ing = this.state.currentItem
+        let ings = this.state.list
+        ings.push(ing)
+        this.setState({ list: ings })
     }
 
     removeIngredient = (index) => {
         let updatedList = this.state.list.filter((ing, i) => i !== index)
         this.setState({ list: updatedList })
     }
+ 
+    setIngredient = (event) => {
+        let item = this.state.allIngredients[event.target.value]
+        this.setState({ currentItem: item })
+    }
+
+    changeQuantity = (event) => {
+        let item = this.state.currentItem
+        item.quantity = event.target.value
+        this.setState({ currentItem: item })
+    }
+
+    checkState = () => {
+        console.log(this.state)
+    }
 
     render(){
         return(
             <div>
                 <h1>Create Grocery List: </h1>
-                <button onClick={ this.addIngredient }>Add Ingredient</button>
+                <button onClick={ this.checkState }>Check State</button>
                 <div className="float-right">
                     <GroceryListStatus list={ this.state.list } removeIngredient={ this.removeIngredient } />
                 </div>
                 <div className="float-left">
-                    <NewOrEditIngredient />
+                    <NewOrEditIngredient 
+                        currentItem={ this.state.currentItem } 
+                        setIngredient={ this.setIngredient }
+                        changeQuantity={ this.changeQuantity }
+                        addIngredient={ this.addIngredient } 
+                    />
                 </div>
             </div>
         )

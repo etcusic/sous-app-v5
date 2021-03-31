@@ -6,19 +6,12 @@ class NewOrEditIngredient extends Component {
     constructor(){
         super()
         this.state = {
-            currentItem: {},
-            allIngredients: {},
             filteredIngredients: []
         }
     }
 
     componentDidMount(){
-        let ingredients = {}
-        this.props.ingredients.forEach( ing => ingredients[ing.id] = ing )
-        this.setState({ 
-            allIngredients: ingredients,
-            filteredIngredients: this.props.ingredients 
-        })
+        this.setState({ filteredIngredients: this.props.ingredients })
     }
     
     showCategory = (event) => {
@@ -26,21 +19,6 @@ class NewOrEditIngredient extends Component {
         let filteredIngredients = value === "all" ? this.props.ingredients : this.props.ingredients.filter(ing => ing.category === value)
         this.setState({ filteredIngredients: filteredIngredients })
     }
-
-    setIngredient = (event) => {
-        let item = this.state.allIngredients[event.target.value]
-        this.setState({ currentItem: item })
-    }
-
-    changeQuantity = (event) => {
-        let item = this.state.currentItem
-        item.quantity = event.target.value
-        this.setState({ currentItem: item })
-    }
-
-    checkState = () => {
-        console.log(this.state.currentItem)
-    } 
 
     render(){
         return(
@@ -65,7 +43,7 @@ class NewOrEditIngredient extends Component {
                     <li>
                         Ingredient:
                         {/* ACCOUNT FOR ALREADY SELECTED INGREDIENTS - EDIT */}
-                        <select onChange={ event => this.setIngredient(event) }>
+                        <select onChange={ event => this.props.setIngredient(event) }>
                             <option value="0">---</option>
                             { this.state.filteredIngredients.map(ing => {
                                 return <option value={ ing.id }>{ ing.name }</option>
@@ -75,16 +53,15 @@ class NewOrEditIngredient extends Component {
 
                     <li>
                         Quantity:
-                        <input type="number" placeholder="---" onChange={ event => this.changeQuantity(event) }></input>
+                        <input type="number" placeholder="---" onChange={ event => this.props.changeQuantity(event) }></input>
                     </li>
 
                     <li>
-                        Unit: { this.state.currentItem.name ? this.state.currentItem.unit : "---"} 
+                        Unit: { this.props.currentItem.name ? this.props.currentItem.unit : "---"} 
                     </li>
                 </ul>
                     
-
-                    <button onClick={ this.checkState }>Check State</button>
+                <button onClick = { this.props.addIngredient }>Add Ingredient</button>
                     
                 </div>
             </div>
