@@ -7,17 +7,6 @@ const NewOrEditIngredient = ({ ingredients, category, currentItem, setCategory, 
     const filteredIngredients = () => {
         return category === "all" ? [blankIngredient, ...ingredients] : [blankIngredient, ...ingredients.filter(ing => ing.category === category)] 
     }
-    
-    // showCategory = (event, category) => {
-    //     let value = event ? event.target.value : category
-    //     console.log(value)
-    //     let filteredIngredients = value === "all" ? this.ingredientsWithBlank(this.props.ingredients) : this.ingredientsWithBlank(this.props.ingredients.filter(ing => ing.category === value))
-    //     // this.setState({ filteredIngredients: filteredIngredients })
-    //     this.setState({ 
-    //         category: value,
-    //         filteredIngredients: filteredIngredients 
-    //     })
-    // }
 
     const categoryOptions = (cat) => {
         const categories = ["all", "proteins", "dried goods", "produce", "dairy", "frozen goods", "condiments", "spices"]
@@ -40,12 +29,6 @@ const NewOrEditIngredient = ({ ingredients, category, currentItem, setCategory, 
             }
         })
     }
-
-    // addIngredientAndReset = () => {
-    //     this.showCategory(false, "all")
-    //     this.props.addIngredient()
-    // }
-
 
     return(
         <div>
@@ -70,19 +53,19 @@ const NewOrEditIngredient = ({ ingredients, category, currentItem, setCategory, 
                         </td>
                     </tr>
                 
-                    {/* <tr>
+                    <tr>
                         <td>Quantity: </td>
                         <td>
-                            <input type="number" onChange={ event => this.props.changeQuantity(event) } value={ this.props.currentItem.quantity }></input>
+                            <input type="number" onChange={ event => changeQuantity(event.target.value) } value={ currentItem.quantity }></input>
                         </td>
-                    </tr> */}
+                    </tr>
                 
-                    {/* <tr>
+                    <tr>
                         <td>Unit: </td>
                         <td>
-                            { this.props.currentItem.name ? this.props.currentItem.unit : "---"}
+                            { currentItem.name ? currentItem.unit : "---"}
                         </td>
-                    </tr> */}
+                    </tr>
                 
                 </tbody>
             </table>

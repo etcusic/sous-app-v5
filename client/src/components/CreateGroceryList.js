@@ -54,8 +54,7 @@ class CreateGroceryList extends Component {
     }
 
     newIngredient = (id) => {
-        let item = this.state.allIngredients[id]
-        // item.quantity = 0 ???
+        let item = id != 0 ? this.state.allIngredients[id] : {id: 0, quantity: 0}
         this.setState({ currentItem: item })
     }
 
@@ -72,9 +71,9 @@ class CreateGroceryList extends Component {
         this.setState({ category: cat })
     }
 
-    changeQuantity = (event) => {
-        let item = this.state.currentItem
-        item.quantity = event.target.value
+    changeQuantity = (value) => {
+        let item = Object.assign({}, this.state.currentItem)
+        item.quantity = value
         this.setState({ currentItem: item })
     }
 
