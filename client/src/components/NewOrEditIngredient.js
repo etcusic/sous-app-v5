@@ -1,89 +1,96 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 
-class NewOrEditIngredient extends Component {
+const NewOrEditIngredient = ({ ingredients, category, currentItem, setCategory, setIngredient, changeQuantity, addIngredient }) => {
 
-    constructor(){
-        super()
-        this.state = {
-            filteredIngredients: []
-        }
+    const filteredIngredients = (cat) => {
+        return cat === "all" ? [...ingredients] : [...ingredients.filter(ing => ing.category === cat)] 
     }
 
-    componentDidMount(){
-        this.setState({ filteredIngredients: this.ingredientsWithBlank(this.props.ingredients) })
-    }
-
-    ingredientsWithBlank(ings){
-        const blank = {id: 0, name: "---"}
-        return [blank, ...ings]
-    }
+    // ingredientsWithBlank(ings){
+    //     const blank = {id: 0, name: "---"}
+    //     return [blank, ...ings]
+    // }
     
-    showCategory = (event) => {
-        let value = event.target.value
-        let filteredIngredients = value === "all" ? this.ingredientsWithBlank(this.props.ingredients) : this.ingredientsWithBlank(this.props.ingredients.filter(ing => ing.category === value))
-        this.setState({ filteredIngredients: filteredIngredients })
+    // showCategory = (event, category) => {
+    //     let value = event ? event.target.value : category
+    //     console.log(value)
+    //     let filteredIngredients = value === "all" ? this.ingredientsWithBlank(this.props.ingredients) : this.ingredientsWithBlank(this.props.ingredients.filter(ing => ing.category === value))
+    //     // this.setState({ filteredIngredients: filteredIngredients })
+    //     this.setState({ 
+    //         category: value,
+    //         filteredIngredients: filteredIngredients 
+    //     })
+    // }
+
+    const categoryOptions = (cat) => {
+        const categories = ["all", "proteins", "dried goods", "produce", "dairy", "frozen goods", "condiments", "spices"]
+        return categories.map((cat, i) => {
+            if (cat === category){
+                return <option selected keyId={ `category-${i + 1}` } value={ cat }>{ cat }</option>
+            } else {
+                return <option keyId={ `category-${i + 1}` } value={ cat }>{ cat }</option>
+            }
+        })
     }
 
-    render(){
-        return(
-            <div>
-                <h1>Create Grocery List: </h1>
-                <div>
-                <ul>
-                    <li>
-                        Category: 
-                        <select onChange={ event => this.showCategory(event) }>
-                            <option key="category-1" value="all">all</option>
-                            <option key="category-2" value="proteins">proteins</option>
-                            <option key="category-3" value="dried goods">dried goods</option>
-                            <option key="category-4" value="produce">produce</option>
-                            <option key="category-5" value="dairy">dairy</option>
-                            <option key="category-6" value="frozen goods">frozen goods</option>
-                            <option key="category-7" value="condiments">condiments</option>
-                            <option key="category-8" value="spices">spices</option>
-                        </select>
-                    </li>
+    // addIngredientAndReset = () => {
+    //     this.showCategory(false, "all")
+    //     this.props.addIngredient()
+    // }
 
-                    <li>
-                        Ingredient:
-                        {/* ACCOUNT FOR ALREADY SELECTED INGREDIENTS - EDIT */}
-                        <select onChange={ event => this.props.setIngredient(event) }>
-                            { this.state.filteredIngredients.map(ing => {
-                                if (ing.id === this.props.currentItem.id){
-                                    return <option selected value={ ing.id }>{ ing.name }</option>
-                                } else {
-                                    return <option value={ ing.id }>{ ing.name }</option>
-                                }
+
+    return(
+        <div>
+            <h1>Add Ingredient to List: </h1>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Category: </td>
+                        <td>
+                            <select onChange={ event => setCategory(event.target.value) }>
+                                { categoryOptions(category) }
+                            </select>
+                        </td>
+                    </tr>
+
+                    {/* <tr>
+                        <td>Ingredient: </td>
+                        <td>
+                            <select onChange={ event => this.props.setIngredient(event) }>
+                                { this.state.filteredIngredients.map(ing => {
+                                    if (ing.id === this.props.currentItem.id){
+                                        return <option selected value={ ing.id }>{ ing.name }</option>
+                                    } else {
+                                        return <option value={ ing.id }>{ ing.name }</option>
+                                    }
+                                    
+                                }) }
+                            </select>
+                        </td>
+                    </tr> */}
+                
+                    {/* <tr>
+                        <td>Quantity: </td>
+                        <td>
+                            <input type="number" onChange={ event => this.props.changeQuantity(event) } value={ this.props.currentItem.quantity }></input>
+                        </td>
+                    </tr> */}
+                
+                    {/* <tr>
+                        <td>Unit: </td>
+                        <td>
+                            { this.props.currentItem.name ? this.props.currentItem.unit : "---"}
+                        </td>
+                    </tr> */}
+                
+                </tbody>
+            </table>
                                 
-                            }) }
-                        </select>
-                    </li>
+            {/* <button onClick = { this.addIngredientAndReset }>Add Ingredient</button> */}
+                 
+        </div>
+    )
 
-                    <li>
-                        Quantity:
-                        <input type="number" onChange={ event => this.props.changeQuantity(event) } value={ this.props.currentItem.quantity }></input>
-                    </li>
-
-                    <li>
-                        Unit: { this.props.currentItem.name ? this.props.currentItem.unit : "---"} 
-                    </li>
-                </ul>
-                    
-                <button onClick = { this.props.addIngredient }>Add Ingredient</button>
-                    
-                </div>
-            </div>
-        )
-    }
-
-}
-
-const mapStateToProps = state => {
-    return {
-        userName: state.user.name,
-        ingredients: state.ingredients
-    }
 }
   
-export default connect(mapStateToProps)(NewOrEditIngredient)
+export default NewOrEditIngredient

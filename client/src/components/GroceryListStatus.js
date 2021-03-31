@@ -8,14 +8,14 @@ class GroceryListStatus extends Component {
     render(){
         return(
             <div>
-                <h1 className="float-center">Create Grocery Status: </h1>
+                <h1 className="float-center">Grocery List Status: </h1>
                 <table className="float-center">
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>REMOVE</th>
                             <th>INGREDIENT</th>
                             <th>QUANTITY</th>
-                            <th></th>
+                            <th>EDIT</th>
                         </tr>
                     </thead>
 

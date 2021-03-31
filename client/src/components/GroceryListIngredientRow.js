@@ -6,7 +6,7 @@ const GroceryListIngredientRow = ({ index, ingredient, setIngredient, removeIngr
             <td><button onClick={ () => removeIngredient(index) }> - </button></td>
             <td>{ ingredient.name }</td>
             <td>{ ingredient.quantity }</td>
-            <td><button onClick={ () => setIngredient(ingredient.id) }>edit</button></td>
+            <td><button onClick={ () => setIngredient(false, ingredient.id) }> ~ </button></td>
         </tr>
     )
 }
