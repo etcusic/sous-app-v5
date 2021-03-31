@@ -30,8 +30,8 @@ class CreateGroceryList extends Component {
     addIngredient = () => {
         // need to add a validation checker
         let ing = Object.assign({}, this.state.currentItem)
-        let ings = [...this.state.list, ing]
-        this.resetInput(ings)
+        let updatedList = [...this.state.list, ing]
+        this.resetInput(updatedList)
     }
 
     resetInput = (updatedList) => {

@@ -70,7 +70,7 @@ const NewOrEditIngredient = ({ ingredients, category, currentItem, setCategory, 
                 </tbody>
             </table>
                                 
-            {/* <button onClick = { this.addIngredientAndReset }>Add Ingredient</button> */}
+            <button onClick = { addIngredient }>Add Ingredient</button>
                  
         </div>
     )
