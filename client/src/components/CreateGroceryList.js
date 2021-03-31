@@ -23,14 +23,18 @@ class CreateGroceryList extends Component {
         })
     }
 
-    // reset AddToGroceryList after an ingredient is added
+    // YOU ARE HERE
+    // NewOrEditIngredient needs to read off of this.state.currentItem
+    // select categories all need to have a blank option at the top of the list
 
-    // need to remove count once form input is working
     addIngredient = () => {
-        let ing = this.state.currentItem
+        // need to add a validation checker
+        let ing = Object.assign({}, this.state.currentItem)
         let ings = [...this.state.list, ing]
-        console.log(ings)
-        this.setState({ list: ings })
+        this.setState({ 
+            currentItem:  {id: 0, quantity: 0},
+            list: ings 
+        })
     }
 
     removeIngredient = (index) => {

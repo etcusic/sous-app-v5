@@ -11,12 +11,17 @@ class NewOrEditIngredient extends Component {
     }
 
     componentDidMount(){
-        this.setState({ filteredIngredients: this.props.ingredients })
+        this.setState({ filteredIngredients: this.ingredientsWithBlank(this.props.ingredients) })
+    }
+
+    ingredientsWithBlank(ings){
+        const blank = {id: 0, name: "---"}
+        return [blank, ...ings]
     }
     
     showCategory = (event) => {
         let value = event.target.value
-        let filteredIngredients = value === "all" ? this.props.ingredients : this.props.ingredients.filter(ing => ing.category === value)
+        let filteredIngredients = value === "all" ? this.ingredientsWithBlank(this.props.ingredients) : this.ingredientsWithBlank(this.props.ingredients.filter(ing => ing.category === value))
         this.setState({ filteredIngredients: filteredIngredients })
     }
 
@@ -44,16 +49,20 @@ class NewOrEditIngredient extends Component {
                         Ingredient:
                         {/* ACCOUNT FOR ALREADY SELECTED INGREDIENTS - EDIT */}
                         <select onChange={ event => this.props.setIngredient(event) }>
-                            <option value="0">---</option>
                             { this.state.filteredIngredients.map(ing => {
-                                return <option value={ ing.id }>{ ing.name }</option>
+                                if (ing.id === this.props.currentItem.id){
+                                    return <option selected value={ ing.id }>{ ing.name }</option>
+                                } else {
+                                    return <option value={ ing.id }>{ ing.name }</option>
+                                }
+                                
                             }) }
                         </select>
                     </li>
 
                     <li>
                         Quantity:
-                        <input type="number" placeholder="---" onChange={ event => this.props.changeQuantity(event) }></input>
+                        <input type="number" onChange={ event => this.props.changeQuantity(event) } value={ this.props.currentItem.quantity }></input>
                     </li>
 
                     <li>
