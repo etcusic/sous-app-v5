@@ -20,7 +20,15 @@ class GroceryListStatus extends Component {
                     </thead>
 
                     <tbody>
-                        { this.props.list.map((ingredient, index) => <GroceryListIngredientRow ingredient={ ingredient } index={ index } removeIngredient={ this.props.removeIngredient } />) }
+                        { this.props.list.map((ingredient, index) => {
+                        return (
+                            <GroceryListIngredientRow 
+                                index={ index } 
+                                ingredient={ ingredient } 
+                                setIngredient={ this.props.setIngredient }
+                                removeIngredient={ this.props.removeIngredient } 
+                            /> 
+                        )})}
                     </tbody>
                 </table>
             </div>

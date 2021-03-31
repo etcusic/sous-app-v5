@@ -1,12 +1,12 @@
 import React from 'react'
 
-const GroceryListIngredientRow = ({ ingredient, index, removeIngredient }) => {
+const GroceryListIngredientRow = ({ index, ingredient, setIngredient, removeIngredient }) => {
     return (
         <tr keyId={ `grocery-item-${index + 1}` }>
             <td><button onClick={ () => removeIngredient(index) }> - </button></td>
             <td>{ ingredient.name }</td>
             <td>{ ingredient.quantity }</td>
-            <td>edit</td>
+            <td><button onClick={ () => setIngredient(ingredient.id) }>edit</button></td>
         </tr>
     )
 }

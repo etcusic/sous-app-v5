@@ -28,8 +28,8 @@ class CreateGroceryList extends Component {
     // need to remove count once form input is working
     addIngredient = () => {
         let ing = this.state.currentItem
-        let ings = this.state.list
-        ings.push(ing)
+        let ings = [...this.state.list, ing]
+        console.log(ings)
         this.setState({ list: ings })
     }
 
@@ -39,8 +39,13 @@ class CreateGroceryList extends Component {
     }
  
     setIngredient = (event) => {
-        let item = this.state.allIngredients[event.target.value]
-        this.setState({ currentItem: item })
+        let value = event.target ? event.target.value : event
+        let item = this.state.allIngredients[value]
+        let adjustedList = this.state.list.filter(ing => ing.id != value)
+        this.setState({ 
+            currentItem: item,
+            list: adjustedList
+        })
     }
 
     changeQuantity = (event) => {
@@ -59,7 +64,11 @@ class CreateGroceryList extends Component {
                 <h1>Create Grocery List: </h1>
                 <button onClick={ this.checkState }>Check State</button>
                 <div className="float-right">
-                    <GroceryListStatus list={ this.state.list } removeIngredient={ this.removeIngredient } />
+                    <GroceryListStatus 
+                        list={ this.state.list } 
+                        removeIngredient={ this.removeIngredient } 
+                        setIngredient={ this.setIngredient }
+                    />
                 </div>
                 <div className="float-left">
                     <NewOrEditIngredient 
