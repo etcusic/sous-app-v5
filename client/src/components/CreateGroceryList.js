@@ -48,13 +48,14 @@ class CreateGroceryList extends Component {
         this.setState({ list: updatedList })
     }
  
-    setIngredient = (event, id) => {
+    setIngredient = (action, id) => {
         // if new ingredient => pull from selected option : else => edit from existing ingredient
-        event ? this.newIngredient(event.target.value) : this.editIngredient(id)
+        action === "new" ? this.newIngredient(id) : this.editIngredient(id)
     }
 
     newIngredient = (id) => {
         let item = this.state.allIngredients[id]
+        // item.quantity = 0 ???
         this.setState({ currentItem: item })
     }
 

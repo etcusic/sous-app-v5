@@ -2,14 +2,11 @@ import React from 'react'
 
 const NewOrEditIngredient = ({ ingredients, category, currentItem, setCategory, setIngredient, changeQuantity, addIngredient }) => {
 
-    const filteredIngredients = (cat) => {
-        return cat === "all" ? [...ingredients] : [...ingredients.filter(ing => ing.category === cat)] 
-    }
+    const blankIngredient = {id: 0, name: "---"}
 
-    // ingredientsWithBlank(ings){
-    //     const blank = {id: 0, name: "---"}
-    //     return [blank, ...ings]
-    // }
+    const filteredIngredients = () => {
+        return category === "all" ? [blankIngredient, ...ingredients] : [blankIngredient, ...ingredients.filter(ing => ing.category === category)] 
+    }
     
     // showCategory = (event, category) => {
     //     let value = event ? event.target.value : category
@@ -29,6 +26,17 @@ const NewOrEditIngredient = ({ ingredients, category, currentItem, setCategory, 
                 return <option selected keyId={ `category-${i + 1}` } value={ cat }>{ cat }</option>
             } else {
                 return <option keyId={ `category-${i + 1}` } value={ cat }>{ cat }</option>
+            }
+        })
+    }
+
+    const ingredientOptions = () => {
+        let ings = filteredIngredients() 
+        return ings.map(ing => {
+            if (ing.id === currentItem.id){
+                return <option selected value={ ing.id }>{ ing.name }</option>
+            } else {
+                return <option value={ ing.id }>{ ing.name }</option>
             }
         })
     }
@@ -53,21 +61,14 @@ const NewOrEditIngredient = ({ ingredients, category, currentItem, setCategory, 
                         </td>
                     </tr>
 
-                    {/* <tr>
+                    <tr>
                         <td>Ingredient: </td>
                         <td>
-                            <select onChange={ event => this.props.setIngredient(event) }>
-                                { this.state.filteredIngredients.map(ing => {
-                                    if (ing.id === this.props.currentItem.id){
-                                        return <option selected value={ ing.id }>{ ing.name }</option>
-                                    } else {
-                                        return <option value={ ing.id }>{ ing.name }</option>
-                                    }
-                                    
-                                }) }
+                            <select onChange={ event => setIngredient("new", event.target.value) }>
+                                { ingredientOptions() }
                             </select>
                         </td>
-                    </tr> */}
+                    </tr>
                 
                     {/* <tr>
                         <td>Quantity: </td>
